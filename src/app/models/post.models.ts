@@ -1,4 +1,4 @@
-export class PostList{
+export class Post{
 
     constructor(
         public userId   : number,

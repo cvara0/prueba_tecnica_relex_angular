@@ -109,7 +109,7 @@
   /*!
    grid boostrap--------------------------------------------------------------------------------------------------------
    */
-  h3{
+  h4{
     color: #A1AE4B;
     font-weight: bolder;
     font-style: italic;
@@ -124,4 +124,8 @@
  
     thead{
         white-space: nowrap;
+    }
+
+    td{
+        white-space: pre-wrap;
     }

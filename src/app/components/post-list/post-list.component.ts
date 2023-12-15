@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PostList } from 'src/app/models/post-list.models';
+import { Post } from 'src/app/models/post.models';
 import { PostListService } from 'src/app/services/post-list.service';
 
 @Component({
@@ -9,11 +9,12 @@ import { PostListService } from 'src/app/services/post-list.service';
 })
 export class PostListComponent implements OnInit {
 
-  p: number = 1;
-  collection: PostList[] = []; 
-  page                :number=0;
-  searchValue         :string='';
-  
+  p            :number = 1;
+  postList   :Post[] = []; 
+  page         :number=0;
+  searchValue  :string='';
+  isLoading    :boolean=false;
+
   constructor(private postListService:PostListService){
 
   }
@@ -27,7 +28,7 @@ export class PostListComponent implements OnInit {
             title : auxPost.title,
             body  : auxPost.body
           }
-          this.collection.push(post);
+          this.postList.push(post);
       })
     });
   
@@ -39,5 +40,12 @@ export class PostListComponent implements OnInit {
     this.searchValue=searchValue;
   }
 
+  deletePost(postToDelete:Post){
+    this.isLoading=true;
+      if (window.confirm("Eliminar post "+postToDelete.title+" ?")){
+        this.postListService.deletePost(postToDelete.id); 
+    }else
+      this.isLoading=false;
+    }
 
 }

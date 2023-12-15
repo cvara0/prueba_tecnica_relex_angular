@@ -1,7 +1,7 @@
-<h3>LISTA DE POSTS</h3>
+<h4>LISTA DE POSTS</h4>
 <div class="input-group">
     <input #searchByTitleInput (keyup)="searchByTitle(searchByTitleInput.value)" type="text" placeholder="Filtrar por título" class="form-control">
-  </div>
+</div>
 <table class="table table-hover">
     <thead>
       <tr>
@@ -9,24 +9,34 @@
         <th scope="col">ID</th>
         <th scope="col">Título</th>
         <th scope="col">Cuerpo</th>
+        <th scope="col">Acciones</th>
       </tr>
     </thead>
     <tbody *ngIf="searchValue.trim() === ''">
-      <tr *ngFor="let item of this.collection | paginate: { itemsPerPage: 10, currentPage: p }">
-        <th >{{item.userId}}</th>
-        <td>{{item.id}}</td>
-        <td>{{item.title}}</td>
-        <td>{{item.body}}</td>
+      <tr *ngFor="let post of this.postList | paginate: { itemsPerPage: 10, currentPage: p }">
+        <th>{{post.userId}}</th>
+        <td>{{post.id}}</td>
+        <td>{{post.title}}</td>
+        <td>{{post.body}}</td>
+        <td>
+            <button class="btn btn-warning">Editar</button>
+            <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm">Eliminar</button> 
+        </td>
+        
       </tr>
       
     </tbody>
 
     <tbody *ngIf="searchValue.trim() !== ''">
-        <tr *ngFor="let item of this.collection | searchByTitle:this.searchValue">
-          <th >{{item.userId}}</th>
-          <td>{{item.id}}</td>
-          <td>{{item.title}}</td>
-          <td>{{item.body}}</td>
+        <tr *ngFor="let post of this.postList | searchByTitle:this.searchValue">
+          <th >{{post.userId}}</th>
+          <td>{{post.id}}</td>
+          <td>{{post.title}}</td>
+          <td>{{post.body}}</td>
+          <td>
+            <button class="btn btn-warning">Editar</button>
+            <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm">Eliminar</button> 
+        </td>
         </tr>
         <p> No se encontraron más resultados para el título ingresado.</p> 
     </tbody>
