@@ -1,7 +1,6 @@
 <h3>LISTA DE POSTS</h3>
 <div class="input-group">
-    <input placeholder="Filtrar por título" type="text" class="form-control">
-    <input placeholder="Filtrar por palabra clave" type="text" class="form-control">
+    <input #searchByTitleInput (keyup)="searchByTitle(searchByTitleInput.value)" type="text" placeholder="Filtrar por título" class="form-control">
   </div>
 <table class="table table-hover">
     <thead>
@@ -12,7 +11,7 @@
         <th scope="col">Cuerpo</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="searchValue.trim() === ''">
       <tr *ngFor="let item of this.collection | paginate: { itemsPerPage: 10, currentPage: p }">
         <th >{{item.userId}}</th>
         <td>{{item.id}}</td>
@@ -21,7 +20,17 @@
       </tr>
       
     </tbody>
+
+    <tbody *ngIf="searchValue.trim() !== ''">
+        <tr *ngFor="let item of this.collection | searchByTitle:this.searchValue">
+          <th >{{item.userId}}</th>
+          <td>{{item.id}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.body}}</td>
+        </tr>
+        <p> No se encontraron más resultados para el título ingresado.</p> 
+    </tbody>
+     
   </table>
-  
-             
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+   
+  <pagination-controls *ngIf="searchValue.trim() === ''" (pageChange)="p = $event"></pagination-controls>

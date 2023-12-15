@@ -11,6 +11,8 @@ export class PostListComponent implements OnInit {
 
   p: number = 1;
   collection: PostList[] = []; 
+  page                :number=0;
+  searchValue         :string='';
   
   constructor(private postListService:PostListService){
 
@@ -31,5 +33,11 @@ export class PostListComponent implements OnInit {
   
     //console.log(this.collection);
   }
+
+  searchByTitle(searchValue:string){
+    this.page=0;
+    this.searchValue=searchValue;
+  }
+
 
 }

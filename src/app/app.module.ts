@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { APP_ROUTING } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     PostListComponent,
     PostFormComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchByTitlePipe
   ],
   imports: [
     BrowserModule,
