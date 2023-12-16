@@ -6,7 +6,7 @@ import { Post } from '../models/post.models';
 @Injectable({
   providedIn: 'root'
 })
-export class PostListService {
+export class PostService {
 
  
   url:string='https://jsonplaceholder.typicode.com/posts';
@@ -17,6 +17,7 @@ export class PostListService {
     return this.http.get(this.url);
   }
 
+  //Editar post seguir aca
   updatePost(post: Post){
     fetch(`${this.url}/${post.id}`, {
   method: 'PUT',
@@ -31,15 +32,19 @@ export class PostListService {
   },
 })
   .then((response) => response.json())
-  .then((json) => console.log(json));
+  .then((json) => alert("Elemento 'editado' con éxito: "+json))
+  .catch(response=>alert("Error al 'editar' elemento, codigo de respuesta: "+response.status));
   }
 
-  // Método para eliminar un elemento por su ID
+
+
+
+  // Eliminar elemento por su ID
   deletePost(postId: string) {
     fetch(`${this.url}/${postId}`, {
       method: 'DELETE',
-    }).then(response=>response.status===200?alert("Elemento eliminado, codigo de respuesta: "+response.status):alert("Error al eliminar elemento, codigo de respuesta: "+response.status))
-      .catch(response=>alert("Error al eliminar elemento, codigo de respuesta: "+response.status));
+    }).then(response=>response.status===200?alert("Elemento 'eliminado', codigo de respuesta: "+response.status):alert("Error al eliminar elemento, codigo de respuesta: "+response.status))
+      .catch(response=>alert("Error al 'eliminar' elemento, codigo de respuesta: "+response.status));
   }
 
   //seguir con sanitizer

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/models/post.models';
-import { PostListService } from 'src/app/services/post-list.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post-list',
@@ -15,12 +15,12 @@ export class PostListComponent implements OnInit {
   searchValue  :string='';
   isLoading    :boolean=false;
 
-  constructor(private postListService:PostListService){
+  constructor(private postService:PostService){
 
   }
 
   ngOnInit(): void {
-    this.postListService.getPostList().subscribe((postList:any)=>{
+    this.postService.getPostList().subscribe((postList:any)=>{
       postList.map((auxPost:any)=>{
           let post={
             userId: auxPost.userId,
@@ -42,8 +42,8 @@ export class PostListComponent implements OnInit {
 
   deletePost(postToDelete:Post){
     this.isLoading=true;
-      if (window.confirm("Eliminar post "+postToDelete.title+" ?")){
-        this.postListService.deletePost(postToDelete.id); 
+      if (window.confirm("'Eliminar' post "+postToDelete.title+" ?")){
+        this.postService.deletePost(postToDelete.id); 
     }else
       this.isLoading=false;
     }
