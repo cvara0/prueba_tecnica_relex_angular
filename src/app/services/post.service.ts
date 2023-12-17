@@ -9,28 +9,39 @@ import { Post } from '../models/post.models';
 export class PostService {
 
  
-  url:string='https://jsonplaceholder.typicode.com/posts';
-
+  url       :string='https://jsonplaceholder.typicode.com/posts';
+  postList  :Post[]=[];
   constructor(private http:HttpClient) {  }
 
-  getPostList(): Observable<any> {
-    return this.http.get(this.url);
+  getPostList(): Post[] {
+    this.http.get(this.url).subscribe((postList:any)=>{
+      postList.map((auxPost:any)=>{
+          let post={
+            userId: auxPost.userId,
+            id    : auxPost.id,
+            title : auxPost.title,
+            body  : auxPost.body
+          }
+          this.postList.push(post);
+      })
+    });
+    return this.postList;
   }
 
   //Editar post seguir aca
   updatePost(post: Post){
     fetch(`${this.url}/${post.id}`, {
-  method: 'PUT',
-  body: JSON.stringify({
-    id: post.id,
-    title: post.title,
-    body: post.body,
-    userId: post.userId,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
+      method: 'PUT',
+      body: JSON.stringify({
+          id: post.id,
+          title: post.title,
+          body: post.body,
+          userId: post.userId,
+        }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    })
   .then((response) => response.json())
   .then((json) => alert("Elemento 'editado' con éxito: "+json))
   .catch(response=>alert("Error al 'editar' elemento, codigo de respuesta: "+response.status));

@@ -9,6 +9,9 @@ import { APP_ROUTING } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
+import { ConsignaComponent } from './components/home/consigna/consigna.component';
+import { ExtraComponent } from './components/home/extra/extra.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,13 +20,17 @@ import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
     PostFormComponent,
     HomeComponent,
     NavbarComponent,
-    SearchByTitlePipe
+    SearchByTitlePipe,
+    ConsignaComponent,
+    ExtraComponent
   ],
   imports: [
     BrowserModule,
     APP_ROUTING,
     NgxPaginationModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

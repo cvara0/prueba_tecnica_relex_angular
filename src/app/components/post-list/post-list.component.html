@@ -1,45 +1,96 @@
-<h4>LISTA DE POSTS</h4>
-<div class="input-group">
+
+<h4 class="animate__animated animate__fadeInLeftBig">LISTA DE POSTS</h4>
+<div class="input-group animate__animated animate__fadeInRightBig mb-md">
     <input #searchByTitleInput (keyup)="searchByTitle(searchByTitleInput.value)" type="text" placeholder="Filtrar por título" class="form-control">
 </div>
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">ID Usuario</th>
-        <th scope="col">ID</th>
-        <th scope="col">Título</th>
-        <th scope="col">Cuerpo</th>
-        <th scope="col">Acciones</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="searchValue.trim() === ''">
-      <tr *ngFor="let post of this.postList | paginate: { itemsPerPage: 10, currentPage: p }">
-        <th>{{post.userId}}</th>
-        <td>{{post.id}}</td>
-        <td>{{post.title}}</td>
-        <td>{{post.body}}</td>
-        <td>
-            <button class="btn btn-warning mt-sm">Editar</button>
-            <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm">Eliminar</button> 
-        </td>
-      </tr>
-      
-    </tbody>
 
-    <tbody *ngIf="searchValue.trim() !== ''">
-        <tr *ngFor="let post of this.postList | searchByTitle:this.searchValue">
-          <th >{{post.userId}}</th>
-          <td>{{post.id}}</td>
-          <td>{{post.title}}</td>
-          <td>{{post.body}}</td>
-          <td>
-            <button class="btn btn-warning">Editar</button>
-            <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm">Eliminar</button> 
-        </td>
-        </tr>
-        <p> No se encontraron más resultados para el título ingresado.</p> 
-    </tbody>
-     
-  </table>
-   
-  <pagination-controls *ngIf="searchValue.trim() === ''" (pageChange)="p = $event"></pagination-controls>
+<div class="animate__animated animate__fadeInLeftBig">
+    <pagination-controls 
+        [previousLabel]="'Anterior'"
+        [nextLabel]="'Siguiente'" 
+        *ngIf="this.valueToSearch.trim() === ''" (pageChange)="p = $event">
+    </pagination-controls>
+</div>
+
+<div class="animate__animated animate__fadeInUp"> 
+    <table class="table table-hover">
+        
+        <thead>
+            <tr>
+                <th scope="col">ID Usuario</th>
+                <th scope="col">ID</th>
+                <th scope="col">Título</th>
+                <th scope="col">Cuerpo</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody *ngIf="this.valueToSearch.trim() === ''">
+            <tr class="animate__animated animate__fadeIn" *ngFor="let post of this.postList | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{post.userId}}</td>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.body}}</td>
+                <td>
+                    <button (click)="this.createEditPostForm(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
+                    <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm"  title="Eliminar post">✖</button> 
+                </td>
+            </tr>
+        </tbody>
+        
+        <tbody *ngIf="this.valueToSearch.trim() !== ''">
+            <tr *ngFor="let post of this.postList | searchByTitle:this.valueToSearch">
+                <td >{{post.userId}}</td>
+                <td>{{post.id}}</td>
+                <td>{{post.title}}</td>
+                <td>{{post.body}}</td>
+                <td>
+                    <button (click)="this.createEditPostForm(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
+                    <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm" title="Eliminar post">✖</button> 
+                </td>
+            </tr>
+            <p> No se encontraron más resultados para el título ingresado.</p> 
+        </tbody>
+    </table>
+    
+</div>
+<div class="animate__animated animate__fadeInRightBig">
+    <pagination-controls 
+        [previousLabel]="'Anterior'"
+        [nextLabel]="'Siguiente'" 
+        *ngIf="this.valueToSearch.trim() === ''" (pageChange)="p = $event">
+    </pagination-controls>
+</div>
+    
+       
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editar post:</b> {{this.postToEdit?.title}} <br> <b>ID:</b> {{this.postToEdit?.id}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="editPostForm" (ngSubmit)="saveEditPost()" *ngIf="this.editPostForm">
+                <div class="modal-body">
+                    <div class="form-floating mb-3">
+                        <input formControlName="postToEditTitle" type="text" class="form-control" id="floatingInput">
+                        <label for="floatingInput">Título</label>
+                      </div>
+                      <div class="form-floating">
+                        <textarea formControlName="postToEditBody" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Cuerpo</label>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">✖</button>
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">✔</button>
+                </div>
+            </form>   
+        </div>
+    </div>
+</div>
+        
+       
+
+
