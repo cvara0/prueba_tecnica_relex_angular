@@ -226,6 +226,8 @@
   .h-xl{height: 6em;}
   .h-xxl{height: 1em;}
   
+  .plr-auto{padding-left: 50%;padding-right: 50%;}
+
   .header-fig{
     cursor: pointer;
     background-size: cover;

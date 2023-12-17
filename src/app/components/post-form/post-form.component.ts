@@ -12,4 +12,12 @@ export class PostFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get invalidPostToAddTitle(){
+    return "";
+  } 
+  
+  get invalidPostToAddBody(){
+    return "";
+  }
+
 }

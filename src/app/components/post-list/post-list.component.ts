@@ -13,14 +13,15 @@ export class PostListComponent implements OnInit {
   postList      :Post[] = []; 
   page          :number=0;
   valueToSearch :string='';
-  isLoading     :boolean=false;
- 
   postToEdit!: Post;
   
+  titleLength:number=0;
+  bodyLength:number=0;
+
   editPostForm! :FormGroup;
 
   constructor(private postService:PostService,private formBuilder:FormBuilder){
-    
+   
   }
 
 
@@ -29,11 +30,10 @@ export class PostListComponent implements OnInit {
     //console.log(this.postList);
   }
 //
-
-
-setPostToEdit(post:Post){
-  this.postToEdit=post;
-}
+  refreshLength(){
+    this.titleLength=this.editPostForm.get('postToEditTitle')?.value?.length ?? 0;
+    this.bodyLength=this.editPostForm.get('postToEditBody')?.value?.length ?? 0;
+  }
 //
   searchByTitle(valueToSearch:string){
     this.page=0;
@@ -41,38 +41,37 @@ setPostToEdit(post:Post){
   }
 //
   deletePost(postToDelete:Post){
-    this.isLoading=true;
-      if (window.confirm("'Eliminar' post "+postToDelete.title+" ?")){
+      if (window.confirm("'Eliminar' post "+postToDelete.title+" ?"))
         this.postService.deletePost(postToDelete.id); 
-    }else
-      this.isLoading=false;
-    }
-//
-createEditPostForm(post:Post){
-  this.postToEdit=post;
-  this.editPostForm=this.formBuilder.group({
-    postToEditTitle   : [this.postToEdit.title,[Validators.required,Validators.minLength(5),Validators.maxLength(80)]],//primera posicion valor por defecto, segunda, validadores sincronos, tercera validadores asincronos
-    postToEditBody    : [this.postToEdit.body,[Validators.required,Validators.minLength(5),Validators.maxLength(300)]]
-  });
-}
+  }
+  createEditPostForm(post:Post){
+    this.postToEdit=post;
+    this.titleLength=post.title.length;
+    this.bodyLength=post.body.length;
+    this.editPostForm=this.formBuilder.group({
+      postToEditTitle   : [this.postToEdit.title,[Validators.required,Validators.maxLength(80)]],//primera posicion valor por defecto, segunda, validadores sincronos, tercera validadores asincronos
+      postToEditBody    : [this.postToEdit.body,[Validators.required,Validators.maxLength(500)]]
+    });
+  }
 
-get invalidPostToEditTitle(){
-  return this.editPostForm.get('postToEditTitle')?.invalid;
-}
+  get invalidPostToEditTitle(){
+    return this.editPostForm.get('postToEditTitle')?.invalid;
+  }
 
-get invalidPostToEditBody(){
-  return this.editPostForm.get('postToEditBody')?.invalid;
-}
+  get invalidPostToEditBody(){
+    return this.editPostForm.get('postToEditBody')?.invalid;
+  }
 
-saveEditPost(){
-  let post:Post=new Post(
-    this.editPostForm.get('postToEditUserId')?.value,
-    this.postToEdit.id,
-    this.editPostForm.get('postToEditTitle')?.value,
-    this.editPostForm.get('postToEditBody')?.value
-  );
-  
-  this.postService.updatePost(post);
-}
+
+  saveEditPost(){
+    let post:Post=new Post(
+      this.postToEdit.userId,
+      this.postToEdit.id,
+      this.editPostForm.get('postToEditTitle')?.value,
+      this.editPostForm.get('postToEditBody')?.value
+    );
+    
+    this.postService.updatePost(post);
+  }
 
 }

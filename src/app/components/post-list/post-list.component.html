@@ -1,5 +1,5 @@
 
-<h4 class="animate__animated animate__fadeInLeftBig">LISTA DE POSTS</h4>
+<h4 class="animate__animated animate__fadeInDown">LISTA DE POSTS</h4>
 <div class="input-group animate__animated animate__fadeInRightBig mb-md">
     <input #searchByTitleInput (keyup)="searchByTitle(searchByTitleInput.value)" type="text" placeholder="Filtrar por título" class="form-control">
 </div>
@@ -68,23 +68,24 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editar post:</b> {{this.postToEdit?.title}} <br> <b>ID:</b> {{this.postToEdit?.id}}</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editar post:</b><br><p>ID Usuario: {{this.postToEdit?.userId}} <br> ID Post: {{this.postToEdit?.id}} </p> </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form [formGroup]="editPostForm" (ngSubmit)="saveEditPost()" *ngIf="this.editPostForm">
                 <div class="modal-body">
                     <div class="form-floating mb-3">
-                        <input formControlName="postToEditTitle" type="text" class="form-control" id="floatingInput">
-                        <label for="floatingInput">Título</label>
+                        <input formControlName="postToEditTitle" (keyup)="refreshLength()" maxlength="80" type="text" class="form-control" id="floatingInput">
+                        <label for="floatingInput"><span style="color: red;">*</span>Título {{this.titleLength}}/80</label>
                       </div>
                       <div class="form-floating">
-                        <textarea formControlName="postToEditBody" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
-                        <label for="floatingTextarea2">Cuerpo</label>
+                        <textarea formControlName="postToEditBody" (keyup)="refreshLength()" maxlength="500" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                        <label for="floatingTextarea2"><span style="color: red;">*</span>Cuerpo {{this.bodyLength}}/500</label>
                       </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">✖</button>
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">✔</button>
+                    <button *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success" data-bs-dismiss="modal">✔</button>
+                    <ng-template #labelMandatory><label>Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
                 </div>
             </form>   
         </div>
