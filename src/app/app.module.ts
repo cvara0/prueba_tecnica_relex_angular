@@ -12,6 +12,7 @@ import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
 import { ConsignaComponent } from './components/home/consigna/consigna.component';
 import { ExtraComponent } from './components/home/extra/extra.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     SearchByTitlePipe,
     ConsignaComponent,
-    ExtraComponent
+    ExtraComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

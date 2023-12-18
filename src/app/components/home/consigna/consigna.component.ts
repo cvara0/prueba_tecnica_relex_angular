@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-consigna',
-  templateUrl: './consigna.component.html',
-  styleUrls: ['./consigna.component.css']
+  templateUrl: './consigna.component.html'
 })
 export class ConsignaComponent implements OnInit {
 

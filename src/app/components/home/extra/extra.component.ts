@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-extra',
-  templateUrl: './extra.component.html',
-  styleUrls: ['./extra.component.css']
+  templateUrl: './extra.component.html'
 })
 export class ExtraComponent implements OnInit {
 

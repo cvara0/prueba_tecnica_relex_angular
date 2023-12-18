@@ -4,14 +4,13 @@
     <div class="row justify-content-center">
 
 
-        <div class="col-12	col-sm-12 col-md-12	col-lg-8 col-xl-6 col-xxl-6">
-
-        </div>
-        <button [routerLink]="['home']" title="Ver consigna" class="btn green-btn col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 col-xxl-1">CONSIGNA</button>
-        <button [routerLink]="['post-list']" title="Ver información extra" class="btn green-btn  col-12 col-sm-12 col-md-12 col-lg-1 col-xl-1 col-xxl-1">EXTRAS</button>
+        
+        <button [routerLink]="['consigna']" title="Ver consigna" class="btn green-btn col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-1">CONSIGNA</button>
+        <button [routerLink]="['extra']" title="Ver información extra" class="btn green-btn  col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2 col-xxl-1">EXTRA</button>
 
     </div>
-      
+    <router-outlet></router-outlet>
 </div>
+
    
 
