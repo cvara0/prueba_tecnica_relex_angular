@@ -9,8 +9,6 @@ import { APP_ROUTING } from './app.routes';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
-import { ConsignaComponent } from './components/home/consigna/consigna.component';
-import { ExtraComponent } from './components/home/extra/extra.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 
@@ -22,8 +20,6 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     NavbarComponent,
     SearchByTitlePipe,
-    ConsignaComponent,
-    ExtraComponent,
     FooterComponent
   ],
   imports: [

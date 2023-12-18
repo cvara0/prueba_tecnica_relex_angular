@@ -44,7 +44,7 @@ export class PostService {
     })
   .then((response) => response.json())
   .then((json) => alert("Elemento 'editado' con éxito:"+"\nID: "+json['id']+"\nID Usuario: "+json['userId']+"\nTitulo: "+json['title']+"\nCuerpo: "+json['body']))
-  .catch(response=>alert("Error al 'editar' elemento, codigo de respuesta: "+response.status));
+  .catch(response=>alert("Error de conexión, intente más tarde."));
   }
 
   // agregar post
@@ -62,7 +62,7 @@ export class PostService {
     })
     .then((response) => response.json())
     .then((json) => alert("Elemento 'agregado' con éxito:"+"\nID: "+json['id']+"\nID Usuario: "+json['userId']+"\nTitulo: "+json['title']+"\nCuerpo: "+json['body']))
-    .catch(response=>alert("Error al 'agregar' elemento, codigo de respuesta: "+response.status));
+    .catch(response=>alert("Error de conexión, intente más tarde."));
   }
 
 

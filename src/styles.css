@@ -247,7 +247,7 @@
     cursor: pointer;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 270px;
+    width: 236px;
     height: 100px;
     /*filter: drop-shadow(10px 10px 10px #ffffff);*/
 }
@@ -338,4 +338,5 @@
     td{
         white-space: pre-wrap;
     }
+
 
