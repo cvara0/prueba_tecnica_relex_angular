@@ -5,8 +5,7 @@ import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-post-form',
-  templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.css']
+  templateUrl: './post-form.component.html'
 })
 export class PostFormComponent implements OnInit {
 

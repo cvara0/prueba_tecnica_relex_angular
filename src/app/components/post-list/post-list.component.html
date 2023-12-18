@@ -1,5 +1,5 @@
 
-<h4 class="animate__animated animate__fadeInDown">LISTA DE POSTS</h4>
+<h4 class="animate__animated animate__fadeInDown mt-md mb-md">LISTA DE POSTS</h4>
 <div class="input-group animate__animated animate__fadeInRightBig mb-md">
     <input #searchByTitleInput (keyup)="searchByTitle(searchByTitleInput.value)" type="text" placeholder="Filtrar por título" class="form-control">
 </div>
@@ -68,7 +68,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editar post:</b><br><p>ID Usuario: {{this.postToEdit?.userId}} <br> ID Post: {{this.postToEdit?.id}} </p> </h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editando post:</b><br><p>ID Usuario: {{this.postToEdit?.userId}} <br> ID Post: {{this.postToEdit?.id}} </p> </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form [formGroup]="editPostFormGroup" (ngSubmit)="saveEditPost()" *ngIf="this.editPostFormGroup">
@@ -83,8 +83,8 @@
                       </div>
                 </div>
                 <div class="modal-footer">
-                    <button title="Guardar cambios" *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success mlr-auto" data-bs-dismiss="modal">✔</button>
-                    <ng-template #labelMandatory><label>Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
+                    <button title="Guardar cambios" *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success mlr-auto animate__animated animate__fadeInDown" data-bs-dismiss="modal">✔</button>
+                    <ng-template #labelMandatory><label class="animate__animated animate__fadeInDown">Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
                 </div>
             </form>   
         </div>
