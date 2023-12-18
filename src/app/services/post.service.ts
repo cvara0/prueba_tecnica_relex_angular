@@ -28,7 +28,7 @@ export class PostService {
     return this.postList;
   }
 
-  //Editar post seguir aca
+  //Editar post
   updatePost(post: Post){
     fetch(`${this.url}/${post.id}`, {
       method: 'PUT',
@@ -47,10 +47,27 @@ export class PostService {
   .catch(response=>alert("Error al 'editar' elemento, codigo de respuesta: "+response.status));
   }
 
+  // agregar post
+  addPost(post: Post){
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: post.title,
+        body: post.body,
+        userId: post.userId
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+    .then((response) => response.json())
+    .then((json) => alert("Elemento 'agregado' con éxito:"+"\nID: "+json['id']+"\nID Usuario: "+json['userId']+"\nTitulo: "+json['title']+"\nCuerpo: "+json['body']))
+    .catch(response=>alert("Error al 'agregar' elemento, codigo de respuesta: "+response.status));
+  }
 
 
 
-  // Eliminar elemento por su ID
+  // Eliminar post por su ID
   deletePost(postId: string) {
     fetch(`${this.url}/${postId}`, {
       method: 'DELETE',

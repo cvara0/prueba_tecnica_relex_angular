@@ -18,7 +18,7 @@ export class PostListComponent implements OnInit {
   titleLength:number=0;
   bodyLength:number=0;
 
-  editPostForm! :FormGroup;
+  editPostFormGroup! :FormGroup;
 
   constructor(private postService:PostService,private formBuilder:FormBuilder){
    
@@ -31,8 +31,8 @@ export class PostListComponent implements OnInit {
   }
 //
   refreshLength(){
-    this.titleLength=this.editPostForm.get('postToEditTitle')?.value?.length ?? 0;
-    this.bodyLength=this.editPostForm.get('postToEditBody')?.value?.length ?? 0;
+    this.titleLength=this.editPostFormGroup.get('postToEditTitle')?.value?.length ?? 0;
+    this.bodyLength=this.editPostFormGroup.get('postToEditBody')?.value?.length ?? 0;
   }
 //
   searchByTitle(valueToSearch:string){
@@ -44,22 +44,22 @@ export class PostListComponent implements OnInit {
       if (window.confirm("'Eliminar' post "+postToDelete.title+" ?"))
         this.postService.deletePost(postToDelete.id); 
   }
-  createEditPostForm(post:Post){
+  createEditPostFormGroup(post:Post){
     this.postToEdit=post;
     this.titleLength=post.title.length;
     this.bodyLength=post.body.length;
-    this.editPostForm=this.formBuilder.group({
-      postToEditTitle   : [this.postToEdit.title,[Validators.required,Validators.maxLength(80)]],//primera posicion valor por defecto, segunda, validadores sincronos, tercera validadores asincronos
-      postToEditBody    : [this.postToEdit.body,[Validators.required,Validators.maxLength(500)]]
+    this.editPostFormGroup=this.formBuilder.group({
+      postToEditTitle   : [this.postToEdit.title,[Validators.required,Validators.maxLength(80),Validators.pattern(/[\S]/)]],//primera posicion valor por defecto, segunda, validadores sincronos, tercera validadores asincronos
+      postToEditBody    : [this.postToEdit.body,[Validators.required,Validators.maxLength(500),Validators.pattern(/[\S]/)]]
     });
   }
 
   get invalidPostToEditTitle(){
-    return this.editPostForm.get('postToEditTitle')?.invalid;
+    return this.editPostFormGroup.get('postToEditTitle')?.invalid;
   }
 
   get invalidPostToEditBody(){
-    return this.editPostForm.get('postToEditBody')?.invalid;
+    return this.editPostFormGroup.get('postToEditBody')?.invalid;
   }
 
 
@@ -67,8 +67,8 @@ export class PostListComponent implements OnInit {
     let post:Post=new Post(
       this.postToEdit.userId,
       this.postToEdit.id,
-      this.editPostForm.get('postToEditTitle')?.value,
-      this.editPostForm.get('postToEditBody')?.value
+      this.editPostFormGroup.get('postToEditTitle')?.value,
+      this.editPostFormGroup.get('postToEditBody')?.value
     );
     
     this.postService.updatePost(post);

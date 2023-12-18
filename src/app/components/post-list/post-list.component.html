@@ -32,7 +32,7 @@
                 <td>{{post.title}}</td>
                 <td>{{post.body}}</td>
                 <td>
-                    <button (click)="this.createEditPostForm(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
+                    <button (click)="this.createEditPostFormGroup(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
                     <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm"  title="Eliminar post">✖</button> 
                 </td>
             </tr>
@@ -45,7 +45,7 @@
                 <td>{{post.title}}</td>
                 <td>{{post.body}}</td>
                 <td>
-                    <button (click)="this.createEditPostForm(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
+                    <button (click)="this.createEditPostFormGroup(post);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-secondary mt-sm" title="Editar post">✍</button>
                     <button (click)="this.deletePost(post)" class="btn btn-danger ml-sm mt-sm" title="Eliminar post">✖</button> 
                 </td>
             </tr>
@@ -71,7 +71,7 @@
                 <h1 class="modal-title fs-5" id="staticBackdropLabel"><b>Editar post:</b><br><p>ID Usuario: {{this.postToEdit?.userId}} <br> ID Post: {{this.postToEdit?.id}} </p> </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form [formGroup]="editPostForm" (ngSubmit)="saveEditPost()" *ngIf="this.editPostForm">
+            <form [formGroup]="editPostFormGroup" (ngSubmit)="saveEditPost()" *ngIf="this.editPostFormGroup">
                 <div class="modal-body">
                     <div class="form-floating mb-3">
                         <input formControlName="postToEditTitle" (keyup)="refreshLength()" maxlength="80" type="text" class="form-control" id="floatingInput">
@@ -83,8 +83,7 @@
                       </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">✖</button>
-                    <button *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success" data-bs-dismiss="modal">✔</button>
+                    <button *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success mlr-auto" data-bs-dismiss="modal">✔</button>
                     <ng-template #labelMandatory><label>Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
                 </div>
             </form>   
