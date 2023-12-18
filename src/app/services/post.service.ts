@@ -49,7 +49,7 @@ export class PostService {
 
   // agregar post
   addPost(post: Post){
-    fetch('https://jsonplaceholder.typicode.com/posts', {
+    fetch(this.url, {
       method: 'POST',
       body: JSON.stringify({
         title: post.title,

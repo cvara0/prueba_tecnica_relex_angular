@@ -26,7 +26,7 @@ export class PostListComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
-    this.postList=await this.postService.getPostList();
+    this.postList=this.postService.getPostList();
     //console.log(this.postList);
   }
 //
