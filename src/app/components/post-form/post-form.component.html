@@ -1,7 +1,7 @@
 <h4 class="animate__animated animate__fadeInDown">FORMULARIO DE REGISTRO</h4>
-<form [formGroup]="addPostFormGroup" (ngSubmit)="saveAddPost()"><!---->
+<form [formGroup]="addPostFormGroup" (ngSubmit)="saveAddPost()" class="animate__animated animate__fadeInUp"><!---->
 
-  <div class="form-floating mb-3 animate__animated animate__fadeInUp">
+  <div class="form-floating mb-3">
     <input formControlName="postToAddTitle" (keyup)="refreshLength()" maxlength="80" type="text" class="form-control" id="floatingInput">
     <label for="floatingInput"><span style="color: red;">*</span>Título {{this.titleLength}}/80</label>
   </div>
@@ -11,9 +11,9 @@
     <label for="floatingTextarea2"><span style="color: red;">*</span>Cuerpo {{this.bodyLength}}/500</label>
   </div>
 
-  <div class="plr-auto animate__animated animate__fadeInUp">
-    <button  class="btn btn-success" *ngIf="!invalidPostToAddTitle && !invalidPostToAddBody; else labelMandatory" type="submit">✔</button>
-    <ng-template #labelMandatory><label>Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
+  <div class="plr-auto">
+    <button title="Guardar cambios" class="btn btn-success animate__animated animate__fadeInDown" *ngIf="!invalidPostToAddTitle && !invalidPostToAddBody; else labelMandatory" type="submit">✔</button>
+    <ng-template #labelMandatory><label class="animate__animated animate__fadeInDown">Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
   </div>
 </form>
 

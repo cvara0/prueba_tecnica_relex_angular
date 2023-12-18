@@ -83,7 +83,7 @@
                       </div>
                 </div>
                 <div class="modal-footer">
-                    <button *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success mlr-auto" data-bs-dismiss="modal">✔</button>
+                    <button title="Guardar cambios" *ngIf="!invalidPostToEditTitle && !invalidPostToEditBody; else labelMandatory" type="submit" class="btn btn-success mlr-auto" data-bs-dismiss="modal">✔</button>
                     <ng-template #labelMandatory><label>Campos obligatorios (<span style="color: red;">*</span>)</label></ng-template>
                 </div>
             </form>   

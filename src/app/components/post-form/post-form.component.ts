@@ -11,15 +11,17 @@ import { PostService } from 'src/app/services/post.service';
 export class PostFormComponent implements OnInit {
 
   
-  userIdList     :number[] = []; 
+  userIdList        :number[] = []; 
  
-  postToAdd!   : Post;
+  postToAdd!        :Post;
   
-  titleLength  :number=0;
-  bodyLength   :number=0;
+  titleLength       :number=0;
+  bodyLength        :number=0;
 
   addPostFormGroup! :FormGroup;
-  inputTitle   :string='';
+  inputTitle        :string='';
+
+  inOutStyle      :string='';
 
   constructor(private postService:PostService,private formBuilder:FormBuilder){
     
@@ -35,6 +37,8 @@ export class PostFormComponent implements OnInit {
     });
     //console.log(this.postList);
   }
+
+ 
 
 //
   refreshLength(){
