@@ -5,14 +5,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class SearchByTitlePipe implements PipeTransform {
 
-  transform(value: any[], search:string=''): any[] {
+  transform(postList: any[], titleTosearch:string=''): any[] {
 
-    const filteredValues=value.filter(i=>
+    const filteredPostList=postList.filter(i=>
       {
-          return i.title?i.title.includes(search):"";
+          return i.title?i.title.includes(titleTosearch):"";
       });
 
-    return filteredValues;
+    return filteredPostList;
   }
 
 }

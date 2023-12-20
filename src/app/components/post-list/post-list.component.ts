@@ -12,8 +12,9 @@ export class PostListComponent implements OnInit {
   p             :number = 1;
   postList      :Post[] = []; 
   page          :number=0;
-  valueToSearch :string='';
-  postToEdit!: Post;
+  titleToSearch :string='';
+  keywordToSearch :string='';
+  postToEdit!   :Post;
   
   titleLength:number=0;
   bodyLength:number=0;
@@ -26,6 +27,7 @@ export class PostListComponent implements OnInit {
 
 
   async ngOnInit(): Promise<void> {
+    
     this.postList=this.postService.getPostList();
     //console.log(this.postList);
   }
@@ -35,9 +37,12 @@ export class PostListComponent implements OnInit {
     this.bodyLength=this.editPostFormGroup.get('postToEditBody')?.value?.length ?? 0;
   }
 //
-  searchByTitle(valueToSearch:string){
-    this.page=0;
-    this.valueToSearch=valueToSearch;
+  searchByKeyword(keywordToSearch:string){
+    this.keywordToSearch=keywordToSearch;
+  }
+
+  searchByTitle(titleToSearch:string){
+    this.titleToSearch=titleToSearch;
   }
 //
   deletePost(postToDelete:Post){

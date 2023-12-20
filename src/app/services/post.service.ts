@@ -14,6 +14,7 @@ export class PostService {
   constructor(private http:HttpClient) {  }
 
   getPostList(): Post[] {
+    this.postList=[];
     this.http.get(this.url).subscribe((postList:any)=>{
       postList.map((auxPost:any)=>{
           let post={

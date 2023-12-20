@@ -11,6 +11,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SearchByTitlePipe } from './pipes/search-by-title.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { SearchByKeywordPipe } from './pipes/search-by-keyword.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     NavbarComponent,
     SearchByTitlePipe,
-    FooterComponent
+    FooterComponent,
+    SearchByKeywordPipe
   ],
   imports: [
     BrowserModule,
