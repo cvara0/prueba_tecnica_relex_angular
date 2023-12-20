@@ -26,9 +26,19 @@ export class PostListComponent implements OnInit {
   }
 
 
-  async ngOnInit(): Promise<void> {
+  async ngOnInit():Promise<void> {
     
-    this.postList=this.postService.getPostList();
+    this.postService.getPostList().subscribe((postList:any)=>{
+      postList.map((auxPost:Post)=>{
+          let post={
+            userId: auxPost.userId,
+            id    : auxPost.id,
+            title : auxPost.title,
+            body  : auxPost.body
+          }
+          this.postList.push(post);
+      })
+    });
     //console.log(this.postList);
   }
 //

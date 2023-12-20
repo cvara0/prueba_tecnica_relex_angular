@@ -11,6 +11,7 @@ export class PostFormComponent implements OnInit {
 
   
   postToAdd!        :Post;
+  postList!         :Post[];
   userIdList        :number[]=[];
   titleLength       :number=0;
   bodyLength        :number=0;
@@ -23,17 +24,30 @@ export class PostFormComponent implements OnInit {
   }
 
 
-  ngOnInit() {
-    const listaDePosts = this.postService.getPostList();
-    const userIdSet = new Set(listaDePosts.map(post => post.userId));
-    this.userIdList= Array.from(userIdSet);
-   // this.postService.getPostList().map(i=>this.userIdList.push(i.userId));
+  async ngOnInit(): Promise<void> {
+    
+    this.postService.getPostList().subscribe((postList:any)=>{
+      postList.map((auxPost:Post)=>{
+          let post={
+            userId: auxPost.userId
+          }
+          this.userIdList.push(post.userId);
+          this.userIdList = [...new Set(this.userIdList)];
+      })
+    });
+    
+
+    
+    //this.userIdList=Array.from(new Set(this.userIdList));
+
+
+    
     this.addPostFormGroup=this.formBuilder.group({
       postToAddUserId  : ['',[Validators.required]],
       postToAddTitle   : ['',[Validators.required,Validators.maxLength(80),Validators.pattern(/[\S]/)]],//primera posicion valor por defecto, segunda, validadores sincronos, tercera validadores asincronos
       postToAddBody    : ['',[Validators.required,Validators.maxLength(500),Validators.pattern(/[\S]/)]]
     });
-    //console.log(this.postList);
+ 
   }
 
 

@@ -13,22 +13,22 @@ export class PostService {
   postList  :Post[]=[];
   constructor(private http:HttpClient) {  }
 
-  getPostList(): Post[] {
-    this.postList=[];
-    this.http.get(this.url).subscribe((postList:any)=>{
-      postList.map((auxPost:any)=>{
-          let post={
-            userId: auxPost.userId,
-            id    : auxPost.id,
-            title : auxPost.title,
-            body  : auxPost.body
-          }
-          this.postList.push(post);
-      })
-    });
-    return this.postList;
+  getPostList(): Observable<Object> {
+    //this.postList=[];
+    return this.http.get(this.url);
+    
   }
-
+  /*.subscribe((postList:any)=>{
+    postList.map((auxPost:any)=>{
+        let post={
+          userId: auxPost.userId,
+          id    : auxPost.id,
+          title : auxPost.title,
+          body  : auxPost.body
+        }
+        this.postList.push(post);
+    })
+  });*/
   //Editar post
   updatePost(post: Post){
     fetch(`${this.url}/${post.id}`, {
@@ -76,5 +76,4 @@ export class PostService {
       .catch(response=>alert("Error al 'eliminar' elemento, codigo de respuesta: "+response.status));
   }
 
-  //seguir con sanitizer
 }
