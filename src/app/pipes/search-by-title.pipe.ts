@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Post } from '../models/post.models';
 
 @Pipe({
   name: 'searchByTitle'
 })
 export class SearchByTitlePipe implements PipeTransform {
 
-  transform(postList: any[], titleTosearch:string=''): any[] {
+  transform(postList: Post[], titleTosearch:string=''): Post[] {
 
     const filteredPostList=postList.filter(i=>
       {

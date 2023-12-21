@@ -6,7 +6,7 @@ import { Post } from '../models/post.models';
 })
 export class SearchByKeywordPipe implements PipeTransform {
 
-  transform(postList: Post[], keywordToSearch:string=''): any[] {
+  transform(postList: Post[], keywordToSearch:string=''): Post[] {
    
     return postList.filter(post =>
       post.id?.toString().includes(keywordToSearch) ||
