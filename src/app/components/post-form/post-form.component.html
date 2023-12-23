@@ -10,12 +10,12 @@
   </div>
   
   <div class="form-floating mb-3">
-    <input formControlName="postToAddTitle" (keydown)="refreshLength()" maxlength="80" type="text" class="form-control" id="floatingInput">
+    <input formControlName="postToAddTitle" (keyup)="refreshLength()" maxlength="80" type="text" class="form-control" id="floatingInput">
     <label for="floatingInput"><span style="color: red;">*</span>Título {{this.titleLength}}/80</label>
   </div>
 
   <div class="form-floating mb-3">
-    <textarea formControlName="postToAddBody" (keydown)="refreshLength()" maxlength="500" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+    <textarea formControlName="postToAddBody" (keyup)="refreshLength()" maxlength="500" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
     <label for="floatingTextarea2"><span style="color: red;">*</span>Cuerpo {{this.bodyLength}}/500</label>
   </div>
 
